@@ -1,0 +1,182 @@
+<!--Google Font-->
+		<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+		<head>
+		  <link rel="manifest" href="/manifest.json" />
+      <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+      
+		</head>
+			<!--CSS 코드-->
+		<style type="text/css">
+			#center
+			{
+				font-family: 'Jua', sans-serif;
+				text-align: center;
+			}
+			#center2
+			{
+			  font-family: 'Jua', sans-serif;
+			  font-size: 70%;
+			  text-align: center;
+			}
+			#text_notcenter
+			{
+			  font-family: 'Jua', sans-serif;
+			  padding: 0 0 0 50px;
+			}
+			#login_submit
+      {
+          font-family: 'Jua', sans-serif;
+          border: none;
+          outline: none;
+          height: 40px;
+          width: 100px;
+          background: black;
+          color: #fff;
+          font-size: 18px;
+          border-radius: 5px;
+          text-align: center;
+      }
+		</style>
+<script>
+    var OneSignal = window.OneSignal || [];
+            OneSignal.push(function() {
+              OneSignal.init({
+                appId: "88272bce-6e40-4dd9-9d37-8766fdbfcd99",
+              });
+              OneSignal.on('subscriptionChange',function(flag){
+              if(flag==true)
+              {
+                OneSignal.getUserId(function(userId) {
+                document.getElementById("id").value = userId;
+                document.getElementById("idForm").submit();
+                // (Output) OneSignal User ID: 270a35cd-4dda-4b3f-b04e-41d7463a2316    
+                });
+              }
+    });
+            });
+  function check(){
+    var rate = document.getElementById("rate");
+    if(isNaN(rate.value)){
+      rate.focus();
+      alert("숫자만을 넣어주세요!");
+      return false;
+    }
+    if(parseFloat(rate.value) > 2000){
+      rate.focus();
+      alert("2000이하의 값을 넣어주세요");
+      return false;
+    }
+    if(parseFloat(rate.value)<800)
+    {
+      rate.focus();
+      alert("800이상의 값을 넣어주세요");
+      return false;
+    }
+    if(rate.value==""){
+      rate.focus();
+      alert("빈칸은 안됩니다");
+      return false;
+    }
+  }
+  function subscribe(){
+    document.getElementById("sub").value = "subscribe";
+    console.log(document.getElementById("sub").value);
+    document.getElementById("subForm").submit();
+  }
+  function unsubscribe(){
+    document.getElementById("sub").value = "unsubscribe";
+    console.log(document.getElementById("sub").value);
+    document.getElementById("subForm").submit();
+  } 
+</script>
+<header class="navbar navbar-dark bg-dark navbar-expand-lg fixed-top">
+<div class="contianer">
+  <!--<img src='/app/assets/images/logo.jpg'/>-->
+  <a href="/">
+    <img src="/img/logos/logo2.png" width=85>
+  </a>
+</div>
+
+<body class="login_bg">
+  <!-- Toggle Button -->
+  <button class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-laber="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <!-- Navbar -->
+  <nav class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <% if user_signed_in? %>
+        <li class="nav-item nav-link" style="font-family:'Jua', sans-serif"><%= current_user.name %></a></li>
+        <li class="nav-item", id="center" ><%= link_to '로그아웃', destroy_user_session_path, method: 'delete', class: 'nav-link' %></li>
+      <% else %>
+        <li class="nav-item", id="center"><a class="nav-link" href="/users/sign_in">로그인</a></li>
+        <li class="nav-item", id="center"><a class="nav-link" href="/users/sign_up">회원가입</a></li>
+      <% end %>
+    </ul>
+  </nav>
+</header>
+
+
+<!--<h2>Log in</h2>-->
+<div class="loginBox mt-5">
+<div class="container">
+  <img src="data:image/png;base64,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" class="avatar">
+  </br></br>
+  <h3 id="center"> 마이페이지 </h3>
+ <!--<div id="signup" class="my-5">-->
+  <form action="/setRate" method="POST" class="row" onsubmit="return check();" name="myForm" id="myForm">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="input-group mb-2 col-12 mx-auto">
+          <div class="col-12" id="center" >
+              사용자<br>
+              <input type="text" class="form-control mt-1" id="center" aria-label="Username" aria-describedby="basic-addon1" name="name" value="<%= @user.name %>" readonly>
+          </div>
+      </div>
+      <div class="col-12 mt-1" id="center">
+          이메일 주소<br>
+          <input type="email" class="form-control mt-1" id="center" aria-label="email" aria-describedby="basic-addon1" name="email" value="<%= @user.email %>" readonly>
+      </div>
+      <div class="col-12 mt-1" id="center">
+          현재 보유금액<br>
+          <input type="text" class="form-control mt-1" id="center" aria-label="email" aria-describedby="basic-addon1" name="money" value="<%= @money %> 엔" readonly>
+      </div>
+      <div class="col-12 mt-1", id="center">
+          지정환율<br>
+          <% if @user.rate >9999 %>
+            <input type="text" class="form-control mt-1" aria-label="email" aria-describedby="basic-addon1" name="rate" id="rate" placeholder="환율을 지정하시지 않았습니다">
+          <% else %>
+            <input type="text" class="form-control mt-1" aria-label="email" aria-describedby="basic-addon1" name="rate" id="rate" value="<%= @user.rate.to_s %>">
+          <% end %>
+          <p></p>
+          <input type="submit" class="btn btn-primary text-center" id='login_submit', value="환율 설정">
+      
+  </form>
+  <% if current_user.onesignal_id != "" and current_user.subscribe_flag == false %>
+    <button type="button" class="btn btn-primary text-center" id='login_submit' onclick="subscribe()">알림 받기</button>
+  <% elsif current_user.onesignal_id != "" and current_user.subscribe_flag == true %>
+    <button type="button" class="btn btn-primary text-center" id='login_submit' onclick="unsubscribe()">알림 안받기</button>
+  <% end %>
+  <form action="/setId" method="POST" id="idForm">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <input type="hidden" id="id" name="id" value="">
+  </form>
+  <form action="/setSub" method="POST" id="subForm">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <input type="hidden" id="sub" name="sub" value="">
+  </form>
+  </div>
+</div>
+</div>
+
+
+
+
+</body>
+

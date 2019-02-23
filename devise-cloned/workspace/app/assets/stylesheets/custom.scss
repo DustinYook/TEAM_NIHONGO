@@ -1,0 +1,164 @@
+@import "bootstrap";
+
+/* universal */
+body 
+{
+    padding-top: 130px;
+}
+
+/* typography */
+h1, h2, h3, h4, h5, h6 
+{
+    line-height: 1;
+}
+
+/* header */
+#logo 
+{
+    // text-transform: uppercase;
+    // url(/app/assets/images/logo.jpg)
+    letter-spacing: -1px;
+    font-size: 1.7em;
+    font-weight: bold;
+    &:hover 
+    {
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+    // background: url("../app/assets/images/logo.jpg");
+}
+
+
+/* footer */
+footer 
+{
+    margin-top: 45px;
+    a 
+    {
+      color: #555;
+      &:hover 
+      {
+          color: #222;
+      }
+    }
+
+    small
+    {
+        float: left;
+    }
+    
+    ul
+    {
+        float: right;
+        list-style: none;
+        li
+        {
+            float: left;
+            margin-left: 15px;
+        }
+    }
+}
+
+/* login */
+body
+{
+    margin: 0px;
+    padding: 0px;
+    background-color: pink;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding-bottom: 70px;
+    // opacity: 0.7;
+    opacity: 0.9;
+    font-family: sans-serif;
+}
+
+.loginBox
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 320px;
+    min-height: 200px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 40px;
+    opacity: 1.0;
+    box-sizing: border-box;
+}
+
+
+.avatar
+{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+}
+
+h3
+{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.login_text
+{
+    margin: 0px;
+    padding: 5px;
+}
+
+/*
+.login_input
+{
+    border: none;
+    border-bottom: 2px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}*/
+
+
+.login_submit
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 180px;
+    background: black;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.login_submit2
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 175px;
+    background: black;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+

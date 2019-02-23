@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+  <!--HEAD-->
+  <head>
+    <meta charset="UTF-8">
+		<title>이 많은 동전들 니꼬니꼬니?</title>
+    <!--Google Font-->
+	  <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+	  <!--CSS 코드-->
+		<style type="text/css">
+  		#center, #center1
+  		{
+  			font-family: 'Jua', sans-serif;
+  			text-align: center;
+  			color: black;
+  		}
+  		#button
+  		{
+  			background-color: teal;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        font-family: 'Jua', sans-serif;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 30px;
+  		}
+  		#icon
+  		{
+  			border: 2px solid white;
+  			border-radius: 100px;
+  			background-color: teal;
+  		}
+	  </style>
+	  <!--/CSS 코드-->
+	</head>
+  <!--/HEAD-->
+  
+  <!--BODY-->
+  <body>
+        <!--Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav" style="background:black">
+          <div class="container">
+            <!--로고-->
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+              <img src="/img/logos/logo2.png" width=100>
+            </a>
+            <!--반응형 메뉴버튼-->
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <font style="font-family:'Jua',sans-serif;font-size:15px;color:black">메뉴</font>
+              <i class="fa fa-bars" style="color:black;font-size:15px;"></i> <!--사이즈 작아질 경우 표시-->
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav text-uppercase ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger", id="center", href="#services" style="font-family:'Jua', sans-serif">서비스</a>
+                </li>
+                <% if user_signed_in? %>
+                  <li class="nav-item", id="center"><a href="/profile", class="nav-link", id="center" style="font-family:'Jua', sans-serif"><%= current_user.name %></a></li>
+                  <li class="nav-item", id="center"><%= link_to '로그아웃', destroy_user_session_path, method: 'delete', class: 'nav-link', :style=>"font-family: 'Jua', sans-serif;" %></li>
+                <% else %>
+                <li class="nav-item", id="center">
+                  <a class="nav-link" href="/users/sign_in" style="font-family:'Jua', sans-serif">로그인</a>
+                </li>
+                <li class="nav-item", id="center">
+                  <a class="nav-link" href="/users/sign_up" style="font-family:'Jua', sans-serif">회원가입</a>
+                </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!--/Navigation-->
+        
+        <!--Header-->
+        <header class="masthead">
+          <div class="container">
+            <div class="intro-text">
+              <div class="intro-heading text-uppercase", id="center">
+                <h2 style="color:black;font-size:60px">
+                  당신의 일본여행 동반자<br/><br/>니혼<font style="color:red;font-size:60px">GO</font>
+                </h2>
+              </div>
+              <a class="btn btn-primary btn-xl btn-lg js-scroll-trigger", id="button", href="#services">시작하기</a>
+            </div>
+          </div>
+        </header>
+        <!--/Header-->
+        
+        <!--Blank-->
+        <div class="container">
+          <div class="row">
+            <a><br><br><br></a>
+          </div>
+        </div>
+        <!--/Blank-->
+        
+        <!--Services-->
+        <section id="services">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12 text-center">
+                <h2 class="section-heading" style="font-family:'Jua',sans-serif;font-size:50px">니혼<font style="color:red">GO</font>가 제공하는 서비스<br/><br/></h2>
+              </div>
+            </div>
+            <div class="row text-center">
+              <div class="col-md-4 serviceitem">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+                  <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                      <span class="fa-stack fa-4x">              
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-exchange fa-stack-1x fa-inverse" id="icon"></i>
+                      </span>
+                    </div>
+                  </div>
+                </a><br/>
+                <h4 class="service-heading", id="center1" style="font-size:30px">환율알리미</h4>
+                <p id="center">원하는 환율에 환전하고 싶은 당신<br>원하는 환율에 도달 시 알려드립니다!</p>
+              </div>
+              <div class="col-md-4 serviceitem">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal2">
+                  <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                      <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-calculator fa-stack-1x fa-inverse" id="icon"></i>
+                      </span>
+                    </div>
+                  </div>
+                </a><br/>
+                <h4 class="service-heading", id="center1" style="font-size:30px">소비세 계산기</h4>
+                <p id="center" style="color:">소비세 때문에 얼마를 내야 할 지 모르는 당신<br>소비세까지 계산한 금액을 알려드립니다!</p>
+              </div>
+              <div class="col-md-4 serviceitem">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
+                  <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                      <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-dollar fa-stack-1x fa-inverse" id="icon"></i>
+                      </span>
+                    </div>
+                  </div>
+                </a><br/>
+                <h4 class="service-heading", id="center1" style="font-size:30px">지불방법 추천</h4>
+                <p id="center" style="color:black">동전은 많은데 어떻게 내야할지 모르는 당신<br>금액에 맞는 가장 적은 동전 개수를 알려드립니다!</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!--/Services-->
+        
+        <!--Portfolio Modals-->
+        <!-- Modal 1 -->
+        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                  <div class="rl"></div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 mx-auto">
+                    <div class="modal-body">
+                      <!-- Project Details Go Here -->
+                      <h1 id="center" style="color:black;font-size:50px;">환율알리미</h1>
+                      <p class="item-intro text-muted"></p>
+                      <img class="img-fluid d-block mx-auto" src="/img/portfolio/exchange2.jpg" alt="환율알리미">
+                      <p>
+                        <% if user_signed_in? %>
+                          <button class="btn btn-light" type="button" id="center"><a href="/profile">시작하기</a></button>
+                        <% else %>
+                          <button class="btn btn-light" type="button" id="center"><a href="/profile">로그인후 체험하기</a></button>
+                        <% end %>
+                        <button class="btn btn-light" data-dismiss="modal" type="button" id="center"><a href="#">창 닫기</a></button>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal 2 -->
+        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="close-modal" data-dismiss="modal" style="font-size:10px">
+                <div class="lr">
+                  <div class="rl"></div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 mx-auto">
+                    <div class="modal-body">
+                      <!-- Project Details Go Here -->
+                      <h1 id="center" style="color:black;font-size:50px;">소비세 계산기</h1>
+                      <p class="item-intro text-muted"></p>
+                      <img class="img-fluid d-block mx-auto" src="/img/portfolio/tax1.jpg" alt="소비세 계산기">
+                      <p>
+                        <% if user_signed_in? %>
+                          <button class="btn btn-light" type="button" id="center"><a href="/calc">시작하기</a></button>
+                        <% else %>
+                          <button class="btn btn-light" type="button" id="center"><a href="/calc">로그인후 체험하기</a></button>
+                        <% end %>
+                        <button class="btn btn-light" data-dismiss="modal" type="button" id="center"><a href="#">창 닫기</a></button>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal 3 -->
+        <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                  <div class="rl"></div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 mx-auto">
+                    <div class="modal-body">
+                      <!-- Project Details Go Here -->
+                      <h2 class="text-uppercase" id="center" style="color:black">지불방법 추천</h2>
+                      <p class="item-intro text-muted"></p>
+                      <img class="img-fluid d-block mx-auto" src="/img/portfolio/minimize1.jpg" alt="지불방법 추천">
+                      <p>
+                         <% if user_signed_in? %>
+                          <button class="btn btn-light" type="button" id="center"><a href="/calc">시작하기</a></button>
+                        <% else %>
+                          <button class="btn btn-light" type="button" id="center"><a href="/calc">로그인후 체험하기</a></button>
+                        <% end %>
+                          <button class="btn btn-light" data-dismiss="modal" type="button" id="center"><a href="#">창 닫기</a></button>
+                         <!--<button class="btn btn-light" data-dismiss="modal" type="button" id="center">창 닫기</button>-->
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal 4 -->
+        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                  <div class="rl"></div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-12 mx-auto">
+                    <div class="modal-body">
+                      <!-- Team -->
+                      <section class="bg-light" id="team">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-lg-12 text-center">
+                              <h2 class="section-heading text-uppercase" id="center1">니혼<font style="color:red">GO</font> 개발자 소개</h2><br/>
+                            </div>
+                          </div>
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <div class="team-member">
+                              <img class="mx-auto rounded-circle" src="/img/team/hyeon.jpg" alt="육동현">
+                              <h3 id="center1">육동현</h3>
+                              <p class="text-muted" id="center">아키텍트 (팀리더)</p>
+                              <ul class="list-inline social-buttons">
+                                <li class="list-inline-item">
+                                  <a href="https://github.com/DustinYook" target=_blank>
+                                    <i class="fa fa-github"></i>
+                                   </a>
+                                </li>
+                                <li class="list-inline-item">
+                                  <a href="mailto:aomorikaitou93@gmail.com" target=_blank>
+                                    <i class="fa fa-google"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                         </div>
+                        <div class="col-sm-4">
+                          <div class="team-member">
+                            <img class="mx-auto rounded-circle" src="/img/team/nam.jpg" alt="김승남">
+                            <h3 id="center1">김승남</h3>
+                            <p class="text-muted" id="center">백엔드개발자 (알림)</p>
+                            <ul class="list-inline social-buttons">
+                              <li class="list-inline-item">
+                                  <a href="https://github.com/KimSeugnNam" target=_blank>
+                                    <i class="fa fa-github"></i>
+                                   </a>
+                                </li>
+                                <li class="list-inline-item">
+                                  <a href="mailto:hotshot12343@gmail.com" target=_blank>
+                                    <i class="fa fa-google"></i>
+                                  </a>
+                                </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="team-member">
+                            <img class="mx-auto rounded-circle" src="/img/team/yeon.jpg" alt="조재연">
+                            <h3 id="center1">조재연</h3>
+                            <p class="text-muted" id="center">프론트엔드개발자</p>
+                            <ul class="list-inline social-buttons">
+                              <li class="list-inline-item">
+                                  <a href="https://github.com/joejaeyeon" target=_blank>
+                                    <i class="fa fa-github"></i>
+                                   </a>
+                                </li>
+                                <li class="list-inline-item">
+                                  <a href="mailto:joejaeyeon@gmail.com" target=_blank>
+                                    <i class="fa fa-google"></i>
+                                  </a>
+                                </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <!--team second row -->
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="team-member">
+                            <img class="mx-auto rounded-circle" src="/img/team/yeong.jpg" alt="서지영">
+                            <h3 id="center1">서지영</h3>
+                            <p class="text-muted" id="center">백엔드개발자 (로그인)</p>
+                            <ul class="list-inline social-buttons">
+                              <li class="list-inline-item">
+                                  <a href="https://github.com/Seojiyoung" target=_blank>
+                                    <i class="fa fa-github"></i>
+                                   </a>
+                                </li>
+                                <li class="list-inline-item">
+                                  <a href="mailto:seojiyoung329@gmail.com" target=_blank>
+                                    <i class="fa fa-google"></i>
+                                  </a>
+                                </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="team-member">
+                            <img class="mx-auto rounded-circle" src="/img/team/yeon2.jpg" alt="신지연">
+                            <h3 id="center1">신지연</h3>
+                            <p class="text-muted" id="center">백엔드개발자 (환율)</p>
+                            <ul class="list-inline social-buttons">
+                              <li class="list-inline-item">
+                                  <a href="https://github.com/yellow2041" target=_blank>
+                                    <i class="fa fa-github"></i>
+                                   </a>
+                                </li>
+                                <li class="list-inline-item">
+                                  <a href="mailto:jeeyeon654@gmail.com" target=_blank>
+                                    <i class="fa fa-google"></i>
+                                  </a>
+                                </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="team-member">
+                            <img class="mx-auto rounded-circle" src="/img/team/min.jpg" alt="전지민">
+                            <h3 id="center1">전지민</h3>
+                            <p class="text-muted" id="center">프론트엔드개발자</p>
+                            <ul class="list-inline social-buttons">
+                              <li class="list-inline-item">
+                                  <a href="https://github.com/jeonjimin0419" target=_blank>
+                                    <i class="fa fa-github"></i>
+                                   </a>
+                                </li>
+                                <li class="list-inline-item">
+                                  <a href="mailto:jeonjimin0419@gmail.com" target=_blank>
+                                    <i class="fa fa-google"></i>
+                                  </a>
+                                </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section><br/>
+                      <button class="btn btn-secondary" data-dismiss="modal" type="button">
+                        <i class="fa fa-times"></i>창 닫기
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/Portfolio Modals-->
+        
+        <!--Footer-->
+        <footer>
+          <hr/>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-4">
+                <ul class="list-inline quicklinks" style="width:100%">
+                  <li class="list-inline-item">
+                    <a>&nbsp&nbsp&nbsp&nbsp</a>
+                    <a href="/terms" id="center">개인정보 이용약관</a> <!--&nbsp는 공백문자-->
+                  </li>
+                  <li class="list-inline-item">
+                      <a data-toggle="modal" href="#portfolioModal4" id="center">개발자 소개</a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="https://www.facebook.com/LikelionNihonGO" target=_blank id="center">공식 페이스북</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-12">
+                <span class="copyright", id="center">Copyright &copy; NihonGO 2018</span><br/>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <!--/Footer-->
+  </body>
+  <!--/BODY-->
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>이 많은 동전들 니꼬니꼬니?</title>
+		<!--Google Font-->
+		<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+		<!--CSS 코드-->
+		<style type="text/css">
+			/* navbar 설정 */
+			#center
+			{
+				font-family: 'Jua', sans-serif;
+				text-align: center;
+			}
+			#center2
+			{
+			  font-family: 'Jua', sans-serif;
+			  font-size: 80%;
+			  text-align: center;
+			}
+			#text_notcenter
+			{
+			  font-family: 'Jua', sans-serif;
+			  padding: 0 0 0 50px;
+			}
+			/* 타이틀 디자인 */
+			#h1_title
+			{
+				font-family: 'Jua', sans-serif;
+				text-align: center;
+				font-size: 40px;
+			}
+			#div_wallet, #div_calculator, #div_recommend
+			{
+				font-family: 'Jua', sans-serif;
+				width: 90%;
+				margin: 0 auto;
+			}
+			/* 테이블 디자인 */
+			#table_wallet, #table_calculator, #table_recommend
+			{
+				font-family: 'Jua', sans-serif;
+				width: 100%;
+				margin: 0 auto;
+			}
+			table, td
+			{
+   				border: 2px solid black;
+   				padding: 1px;
+    			text-align: center;
+    			margin: 0 auto;
+			}
+			tr:nth-child(even) 
+			{
+				background-color: #f2f2f2;
+			}
+			/* 입력박스 디자인 */
+			input[type=text] 
+			{
+    			width: 100%;
+    			padding: 0px;
+    			margin: 0px;
+    			box-sizing: border-box;
+    			background-color: transparent;
+    			border: none;
+			}
+			input[type=text]:focus 
+			{
+   				border: 2px solid teal;
+   				background-color: white;
+			}
+			/* 여기부터가 탭 제어 */
+			div.wrap, div.tab_wrap
+			{
+        		width: 100%;
+        		margin: 0 auto;
+    		}
+    		ul.tabs
+    		{
+    			padding: 0%;
+    			font-family: 'Jua', sans-serif;
+    			margin: 0 auto;
+        		margin-top: -7%;
+        		width: 90%;
+        		height: 30px;
+    		}
+    		ul.tabs li
+    		{
+        		list-style: none; /*bullet을 표시하지 않음*/
+        		float: left;
+		        width: 33%;
+		        height: 30px;
+		        text-align: center;
+		        line-height: 30px;
+		        border: 2px solid black;
+		        cursor: pointer;
+   			}
+    		ul.tabs li.active 
+    		{
+    			width: 33%;
+		        background-color: #fff;
+		        color: red;
+    		}
+    		button:hover
+    		{
+    			background-color: #fff;
+    		}
+    		button
+    		{
+    			border-radius: 10px;
+    		}
+    		td
+    		{
+    			width: 33%;
+    		}
+		</style>
+		<!--/CSS 코드-->
+	</head>
+	<!--/HEAD-->
+
+	<!--BODY--></br></br></br></br>
+	<body> <!--인라인스타일은 가장 우선순위 높음-->
+		<!--자바스크립트 코드-->
+		<script laguage="javascript">
+			/* 탭을 제어하는 함수 */
+			$("document").ready(function() 
+			{
+       			$(".tab_content").hide();
+        		$(".tab_content").eq(0).show();
+        		$("ul.tabs li").click(function()
+        		{
+            		$("ul.tabs li").removeClass("active")
+            		$(this).addClass("active")
+            		$(".tab_content").hide();
+            		var tabid = $(this).attr("rel");
+            		$("#"+tabid).fadeIn();
+        		})
+    		});
+
+			// 1) 동전지갑
+			/* 전역변수 */
+			fhrd_cnt = hrd_cnt = fif_cnt = ten_cnt = fiv_cnt = one_cnt = 0; // 금액별 개수
+			fhrd_tot = hrd_tot = fif_tot = ten_tot = fiv_tot = one_tot = 0; // 금액별 총액
+			fhrd_pay = hrd_pay = fif_pay = ten_pay = fiv_pay = one_pay = 0; // 금액별 지불개수
+			tax_price = 0; // 소비세 8%를 포함한 가격
+			
+			/* 동전개수를 입력하는 함수 */
+			function cnt_input()
+			{
+				// input 박스로부터 입력받은 동전개수를 변수에 저장
+				fhrd_cnt = parseInt(document.getElementById("fhrd_cnt").value);
+				hrd_cnt = parseInt(document.getElementById("hrd_cnt").value);
+				fif_cnt = parseInt(document.getElementById("fif_cnt").value);
+				ten_cnt = parseInt(document.getElementById("ten_cnt").value);
+				fiv_cnt = parseInt(document.getElementById("fiv_cnt").value);
+				one_cnt = parseInt(document.getElementById("one_cnt").value);
+				if(fhrd_cnt>=0 && hrd_cnt>=0 && fif_cnt>=0 && ten_cnt>=0 && fiv_cnt>=0 && one_cnt>=0)
+				{
+					if(fhrd_cnt==0 && hrd_cnt==0 && fif_cnt==0 && ten_cnt==0 && fiv_cnt==0 && one_cnt==0)
+						alert('값을 입력해주십시오!');
+					// 각 동전별 총액을 변수에 저장
+					fhrd_tot = fhrd_cnt * 500;
+					hrd_tot = hrd_cnt * 100;
+					fif_tot = fif_cnt * 50;
+					ten_tot = ten_cnt * 10;
+					fiv_tot = fiv_cnt * 5;
+					one_tot = one_cnt * 1;
+					// 내가 보유한 동전의 총 액을 계산
+					document.getElementById("onhand_tot").value = (one_tot + fiv_tot + ten_tot + fif_tot + hrd_tot + fhrd_tot);
+				}
+				else // 음수나 숫자가 아닌 입력값을 넣은 경우 에러메세지 출력
+					alert('유효한 숫자를 넣어주십시오!');
+			}
+			/* 동전개수 입력을 리셋하는 함수 */
+			function cnt_reset()
+			{
+				document.getElementById("fhrd_cnt").value = "0";
+				document.getElementById("hrd_cnt").value = "0";
+				document.getElementById("fif_cnt").value = "0";
+				document.getElementById("ten_cnt").value = "0";
+				document.getElementById("fiv_cnt").value = "0";
+				document.getElementById("one_cnt").value = "0";
+				document.getElementById("onhand_tot").value = "0";
+			}
+
+			// 2) 소비세계산
+			/* 소비세 8% 포함한 가격을 계산하는 함수 */
+			function tax_calculator() 
+			{
+				input = parseInt(document.getElementById("price").value);
+				if(input >= 0)
+				{
+					if(input == 0)
+						alert('값을 입력해주십시오!');
+					else
+					{
+						if(document.getElementById("checkbox_auto").checked == true)
+							tax_price = parseInt(input * 1.08);
+						else
+							tax_price = parseInt(input * 1.00);
+						document.getElementById("result").value = tax_price;
+					}
+				}
+				else
+					alert('유효한 숫자를 넣어주십시오!'); // 에러 메세지 창
+			}
+			/* 소비세 계산결과를 리셋하는 함수 */
+			function tax_reset()
+			{
+				document.getElementById("price").value = "0";
+				document.getElementById("result").value = "0";
+			}
+
+			// 3) 지불방법추천
+			/* 지불방법을 추천해주는 함수 */
+			function pay_cnt(face_value)
+			{
+				cnt_temp = parseInt(tot_temp / face_value);
+				tot_temp = tot_temp - (face_value * cnt_temp);
+				return cnt_temp;
+			}
+			/* 지불할 금액을 화면에 표시하는 함수 */
+			function pay_show()
+			{
+				document.getElementById("fhrd_pay").value = fhrd_pay;
+				document.getElementById("hrd_pay").value = hrd_pay;
+				document.getElementById("fif_pay").value = fif_pay;
+				document.getElementById("ten_pay").value = ten_pay;
+				document.getElementById("fiv_pay").value = fiv_pay;
+				document.getElementById("one_pay").value = one_pay;
+			}
+			function how_to_pay()
+			{
+				fhrd_pay = hrd_pay = fif_pay = ten_pay = fiv_pay = one_pay = 0; // 초기화
+				cnt_temp = 0;
+				tot_temp = tax_price;
+				if (tax_price <= one_tot) // 1엔으로 지불가능한 경우
+					one_pay = pay_cnt(1);
+				else if (tax_price <= one_tot + fiv_tot) // 1엔, 5엔으로 지불가능한 경우
+				{
+					fiv_pay = pay_cnt(5);
+					one_pay = pay_cnt(1);
+					if(fiv_pay <= fiv_cnt) // 5엔 충분
+					{
+						if(one_pay <= one_cnt) // 1엔 충분
+						{
+							fiv_pay = fiv_pay;
+							one_pay = one_pay;
+						}
+						else // 1엔 부족
+						{
+							for(var i = fiv_cnt; i >= 0; i=i-1)
+							{
+								for(var j = 0; j <= one_cnt; j=j+1)
+								{
+									if(((i * 5) + (j * 1)) >= tax_price)
+									{
+										fiv_pay = i;
+										one_pay = j;
+										break;
+									}
+								}
+							}
+						}
+					}
+					else // 5엔 부족
+					{
+						if(one_pay <= one_cnt) // 1엔 충분
+						{
+							for(var i = fiv_cnt; i >= 0; i = i - 1)
+							{
+								for(var j = 0; j <= one_cnt; j = j + 1)
+								{
+									if(((i * 5) + (j * 1)) >= tax_price)
+									{
+										fiv_pay = i;
+										one_pay = j;
+										break;
+									}
+								}
+							}
+						}
+					}
+				}
+				else if (tax_price <= one_tot + fiv_tot + ten_tot)
+				{
+					ten_pay = pay_cnt(10);
+					fiv_pay = pay_cnt(5);
+					one_pay = pay_cnt(1);
+				}
+				else if (tax_price <= one_tot + fiv_tot + ten_tot + fif_tot)
+				{
+					fif_pay = pay_cnt(50);
+					ten_pay = pay_cnt(10);
+					fiv_pay = pay_cnt(5);
+					one_pay = pay_cnt(1);
+				}
+				else if (tax_price <= one_tot + fiv_tot + ten_tot + fif_tot + hrd_tot)
+				{
+					hrd_pay = pay_cnt(100);
+					fif_pay = pay_cnt(50);
+					ten_pay = pay_cnt(10);
+					fiv_pay = pay_cnt(5);
+					one_pay = pay_cnt(1);
+				}
+				else if (tax_price <= one_tot + fiv_tot + ten_tot + fif_tot + hrd_tot + fhrd_tot)
+				{
+					fhrd_pay = pay_cnt(500);
+					hrd_pay = pay_cnt(100);
+					fif_pay = pay_cnt(50);
+					ten_pay = pay_cnt(10);
+					fiv_pay = pay_cnt(5);
+					one_pay = pay_cnt(1);
+				}
+				else // 현재 가지고 있는 동전으로 지불불가능한 경우
+					alert('현재 보유한 동전으로는 지불불가능합니다'); // 에러메세지
+				pay_show();
+				return;
+			}
+			/* 지불결과를 리셋하는 함수 */
+			function pay_reset()
+			{
+				document.getElementById("fhrd_pay").value = "0";
+				document.getElementById("hrd_pay").value = "0";
+				document.getElementById("fif_pay").value = "0";
+				document.getElementById("ten_pay").value = "0";
+				document.getElementById("fiv_pay").value = "0";
+				document.getElementById("one_pay").value = "0";
+			}
+			function save()
+			{
+				document.getElementById("fhrd_save").value = fhrd_cnt;
+				document.getElementById("hrd_save").value = hrd_cnt;
+				document.getElementById("fif_save").value = fif_cnt;
+				document.getElementById("ten_save").value = ten_cnt;
+				document.getElementById("fiv_save").value = fiv_cnt;
+				document.getElementById("one_save").value = one_cnt;
+				document.getElementById("saveForm").submit();
+			}
+		</script>
+		<!--/자바스크립트 코드-->
+		
+		<!--헤더-->
+		<header class="navbar navbar-dark bg-dark navbar-expand-lg fixed-top">
+			<div class="contianer">
+			  <!--<img src='/app/assets/images/logo.jpg'/>-->
+			  <a href="/">
+			    <img src="/img/logos/logo2.png" width="85px">
+			  </a>
+			</div>
+			
+			<body class="login_bg">
+			  <!-- Toggle Button -->
+			  <button class="navbar-toggler"
+			          type="button"
+			          data-toggle="collapse"
+			          data-target="#navbarNav"
+			          aria-controls="navbarNav"
+			          aria-expanded="false"
+			          aria-laber="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  
+			  <!-- Navbar -->
+			  <nav class="collapse navbar-collapse" id="navbarNav">
+			    <ul class="navbar-nav ml-auto">
+			      <% if user_signed_in? %>
+			        <li class="nav-item nav-link" style="font-family:'Jua', sans-serif"><%= current_user.name %></a></li>
+			        <li class="nav-item", id="center"><%= link_to '로그아웃', destroy_user_session_path, method: 'delete', class: 'nav-link' %></li>
+			      <% else %>
+			        <li class="nav-item", id="center"><a class="nav-link" href="/users/sign_in">로그인</a></li>
+			        <li class="nav-item", id="center"><a class="nav-link" href="/users/sign_up">회원가입</a></li>
+			      <% end %>
+			    </ul>
+			  </nav>
+		</header>
+		<!--/헤더-->
+		
+		<!--주요서비스-->
+		<br/><br/><br/>
+		<div class="wrap" style="width:90%">
+    		<!--탭 네비게이션-->
+    		<ul class="tabs" id="ul_tab">
+ 	      		<li class="active" rel="tab1">동전지갑</li>
+    	    	<li rel="tab2">소비세 계산기</li> <!--rel: 관계-->
+      		  	<li rel="tab3">지불방법 추천</li>
+    		</ul>
+    		<br/><br/>
+    		<!--/탭 네비게이션-->
+    		
+    		<!--탭 주요내용-->
+    		<div class="tab_wrap">
+    			<!--동전지갑-->
+        		<div id="tab1" class="tab_content">
+			  		<div id="div_wallet">
+						<h1 id="h1_title">나의 동전지갑</h3>
+						내가 보유한 엔화를 각 금액별로 개수로 입력해주십시오<br/>
+						<table id="table_wallet">
+							<tr>
+								<td>단위</td>
+								<td colspan="2">개수</td> <!--colspan을 쓰면 병합가능-->
+							</tr>
+							<tr>
+								<td>500엔</td>
+								<td><input type="text" id="fhrd_cnt" value="<%= @user.fhrd %>"></td>
+								<td>개</td>
+							</tr>
+							<tr>
+								<td>100엔</td>
+								<td><input type="text" id="hrd_cnt" value="<%= @user.hrd %>"></td>
+								<td>개</td>
+							</tr>
+							<tr>
+								<td>50엔</td>
+								<td><input type="text" id="fif_cnt" value="<%= @user.fif %>"></td>
+								<td>개</td>
+							</tr>
+							<tr>
+								<td>10엔</td>
+								<td><input type="text" id="ten_cnt" value="<%= @user.ten %>"></td>
+								<td>개</td>
+							</tr>
+							<tr>
+								<td>5엔</td>
+								<td><input type="text" id="fiv_cnt" value="<%= @user.fiv %>"></td>
+							<td>개</td>
+							</tr>
+							<tr>
+								<td>1엔</td>
+								<td><input type="text" id="one_cnt" value="<%= @user.one %>"></td>
+								<td>개</td>
+							</tr>
+							<tr>
+								<td>보유금액</td>
+								<td><input type="text" id="onhand_tot" value="<%= @money %>" readonly></td>
+								<td>엔</td>
+							</tr>
+						</table>
+						<br/>
+						<button id="cnt_input" onclick="cnt_input()">입력하기</button>
+						<button id="cnt_reset" onclick="cnt_reset()">초기화</button>
+						<!--<button id="cnt_save" onclick="save()">저장하기</button>-->
+						<br/><br/>
+					</div>
+        		</div>
+        		<!--/동전지갑-->
+        		
+        		<!--소비세 계산기-->
+        		<div id="tab2" class="tab_content">
+					<div id="div_calculator">
+						<h1 id="h1_title">소비세 계산기</h3>
+						구매가격을 엔화단위로 입력해주십시오<br/>
+						<form name="c"> 
+							<input type="checkbox" name="autocheck" id="checkbox_auto" checked>
+							<label for="checkbox_auto" style="color:red">소비세 8% 포함여부</label>
+						</form>
+						<table id="table_calculator">
+							<tr>
+								<td>상품가격</td>
+								<td><input type="text" id="price" value="0"></td>
+								<td>엔</td>
+							</tr>
+							<tr>
+								<td>실제가격</td>
+								<td><input type="text" id="result" value="0" readonly></td>
+								<td>엔</td>
+							</tr>
+						</table>
+						<br/>
+						<button id="tax_calculator" onclick="tax_calculator()">계산하기</button>
+						<button id="tax_reset" onclick="tax_reset()">초기화</button>
+						<br/><br/>
+					</div>
+        		</div>
+        		<!--/소비세 계산기-->
+        		
+        		<!--지불방법 추천-->
+        		<div id="tab3" class="tab_content">
+					<div id="div_recommend">
+						<h1 id="h1_title">니혼<font style="color:red">GO</font> 추천 지불방법</h3>
+						<button id="how_to_pay" onclick="how_to_pay()">지불방법 추천받기</button>
+						<button id="pay_reset" onclick="pay_reset()">초기화</button>
+						<br/><br/>
+						<table id="table_recommend">
+							<tr>
+								<td>500엔</td> <!--readonly를 사용하면 수정불가-->
+								<td><input type="text" id="fhrd_pay" value="0" readonly></td> 
+								<td>개</td> <!--value를 통해 초기값 지정가능-->
+							</tr> 
+							<tr>
+								<td>100엔</td>
+								<td><input type="text" id="hrd_pay" value="0" readonly></td>
+								<td>개</td>
+							</tr>
+							<tr>
+								<td>50엔</td>
+								<td><input type="text" id="fif_pay" value="0" readonly></td>
+								<td>개</td>
+							</tr>
+							<tr>
+								<td>10엔</td>
+								<td><input type="text" id="ten_pay" value="0" readonly></td>
+								<td>개</td>
+							</tr>
+							<tr>
+								<td>5엔</td>
+								<td><input type="text" id="fiv_pay" value="0" readonly></td>
+								<td>개</td>
+							</tr>
+							<tr>
+								<td>1엔</td>
+								<td><input type="text" id="one_pay" value="0" readonly></td>
+								<td>개</td>
+							</tr>
+						</table>
+						<br/><br/>
+					</div>
+        		</div>
+        		<!--/지불방법 추천-->
+    		</div>
+    		<!--/탭 주요내용-->
+		</div>
+		<!--/탭-->
+		<form id="saveForm" action="/setCoin" method="POST">
+             <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+             <input type="hidden" id="fhrd_save" name="fhrd_save" value="">
+             <input type="hidden" id="hrd_save" name="hrd_save" value="">
+             <input type="hidden" id="fif_save" name="fif_save" value="">
+             <input type="hidden" id="ten_save" name="ten_save" value="">
+             <input type="hidden" id="fiv_save" name="fiv_save" value="">
+             <input type="hidden" id="one_save" name="one_save" value="">
+        </form>
+	</body>
+	<!--/BODY-->
+	</div>
+</html>
