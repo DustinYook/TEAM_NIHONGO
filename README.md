@@ -8,7 +8,7 @@
 ------
 
 #### 사용 기술스택
-Ruby on Rails Framework, HTML/HTML5, CSS/CSS3, Javascript, AWS Cloud9
+Ruby on Rails Framework, HTML/HTML5, CSS/CSS3, Javascript, AWS Cloud9, CSS Framework(Bootstrap, Materialize)
 
 ------
 
